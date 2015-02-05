@@ -11,12 +11,35 @@ namespace DD.TrafficLight.Netduino
 {
     public class Program
     {
-        public static void Main()
+        private const bool Off = true;
+        private const bool On = false;
+
+        static Program()
         {
-            // write your code here
-
-
+            RedLightRelay = new OutputPort(Pins.GPIO_PIN_D4, Off);
+            YellowLightRelay = new OutputPort(Pins.GPIO_PIN_D3, Off);
+            GreenLightRelay = new OutputPort(Pins.GPIO_PIN_D2, Off);
         }
 
+        private static OutputPort RedLightRelay { get; set; }
+        private static OutputPort GreenLightRelay { get; set; }
+        private static OutputPort YellowLightRelay { get; set; }
+
+        public static void Main()
+        {
+            while (true)
+            {
+                TurnLightOn(RedLightRelay, 1000 * 2);
+                TurnLightOn(GreenLightRelay, 1000 * 2);
+                TurnLightOn(YellowLightRelay, 1000 * 1);
+            }
+        }
+
+        private static void TurnLightOn(OutputPort relay, int duration)
+        {
+            relay.Write(On);
+            Thread.Sleep(duration);
+            relay.Write(Off);
+        }
     }
 }
