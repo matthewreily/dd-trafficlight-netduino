@@ -15,7 +15,7 @@ namespace DD.TrafficLight.Netduino.IO
             try
             {
                 HttpWebRequest request =
-                    (HttpWebRequest)WebRequest.Create("http://okcdemo.azurewebsites.net/api/stoplightsettings");
+                    (HttpWebRequest)WebRequest.Create("http://ddtrafficlightweb.azurewebsites.net/api/TrafficLightConfigurationsApi");
 
                 request.Accept = "application/json";
                 using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
